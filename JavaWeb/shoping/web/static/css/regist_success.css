@@ -1,0 +1,64 @@
+.w {
+    width: 1200px;
+    margin: 0 auto;
+}
+.header{
+    border-bottom: 2px solid #c81523;
+}
+#logo span{
+    line-height: 60px;
+    padding-top: 10px;
+    padding-left: 30px;
+    height: 50px;
+    font-size: 26px;
+    display: block;
+    float: left;
+}
+#logo{
+    margin-top: 5px;
+    padding-left: 20px;
+}
+.content{
+    width: 1210px;
+}
+.t {
+    margin-bottom: 30px;
+}
+.btn-con {
+    margin: 40px 0 87px;
+    text-align: center;
+}
+.t .i {
+    margin: 60px auto 10px;
+    display: block;
+    height: 56px;
+    width: 56px;
+    background: url(http://misc.360buyimg.com/user/reg/3.0.0/css/i/icon-complete.png) no-repeat;
+}
+.t .mt {
+    font-size: 22px;
+    color: #333;
+    text-align: center;
+    line-height: 40px;
+}
+.t .mm {
+    text-align: center;
+    font-size: 16px;
+    color: #999;
+    line-height: 26px;
+}
+.btn {
+    height: 52px;
+    padding: 0 25px;
+    border: 1px solid #ee2223;
+    background: #ee2223;
+    font-size: 16px;
+    color: #fefefe;
+    outline: 0;
+    transition: all .5s;
+    font-weight: 700;
+}
+.btn-con a {
+    display: inline-block;
+    line-height: 52px;
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kuang.mapper.StudentMapper">
+
+
+    <select id="getStudent" resultMap="StudentGrade">
+        select * from student
+    </select>
+    <resultMap id="StudentGrade" type="com.kuang.pojo.Student">
+        <collection property="grade" column="gradeId" javaType="com.kuang.pojo.Grade" select="GradeID" />
+    </resultMap>
+    <select id="GradeID" resultType="com.kuang.pojo.Grade" >
+        select * from grade where gradeid=#{id}
+    </select>
+</mapper>

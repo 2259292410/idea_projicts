@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kuang.mapper.TeacherMapper">
+    <select id="getTeacher" resultMap="TeacherStudent">
+        SELECT s.id sid,s.name sname,t.name tname,t.id tid 
+        FROM student s,teacher t 
+        WHERE s.tid=t.id  and t.id=#{id}
+    </select>
+    <resultMap id="TeacherStudent" type="com.kuang.pojo.Teacher">
+        <result property="id" column="tid"/>
+        <result property="name" column="tname" />
+        <collection property="students" ofType="com.kuang.pojo.Student">
+            <result property="id" column="sid"/>
+            <result property="name" column="sname"/>
+            <result property="tid" column="tid"/>
+        </collection>
+    </resultMap>
+
+
+    <select id="getTeacher2" resultMap="TeacherStudent2">
+        SELECT * FROM teacher where id=#{id}
+    </select>
+    <resultMap id="TeacherStudent2" type="com.kuang.pojo.Teacher">
+        <result property="id"  column="id"/>
+        <collection property="students" column="id" javaType="ArrayList" ofType="com.kuang.pojo.Student" select="getStudentByTeacherId"/>
+    </resultMap>
+    <select id="getStudentByTeacherId" resultType="com.kuang.pojo.Student">
+        SELECT * FROM student WHERE tid=#{id}
+    </select>
+
+</mapper>

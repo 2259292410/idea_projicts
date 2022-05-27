@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kuang.mapper.BlogMapper">
+
+    <cache eviction="FIFO" flushInterval="60000" size="512" readOnly="true"/>
+
+    <insert id="addBlog" parameterType="com.kuang.pojo.Blog">
+        insert into blog (id, title, author, create_time, views)
+        values (#{id},#{title},#{author},#{createTime},#{views})
+    </insert>
+
+    <select id="queryBlogIf" parameterType="map" resultType="com.kuang.pojo.Blog">
+        select * from blog
+        <where>
+            <if test="title !=null">
+                title= #{title}
+            </if>
+            <if test="author !=null">
+                and author= #{author}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateBlog" parameterType="map">
+        update blog
+        <set>
+            <if test="title!=null">
+                title=#{title}
+            </if>
+            <if test="author!=null">
+                author=#{author}
+            </if>
+            <if test="views!=views">
+                views=#{views}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="queryBlogForeach" parameterType="map" resultType="com.kuang.pojo.Blog">
+        select * from blog
+        <where>
+            <if test="ids!=null">
+                id IN
+                <foreach collection="ids" open="(" close=")" separator="," item="id">
+                    #{id}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <select id="queryBlogById" resultType="com.kuang.pojo.Blog">
+        select * from blog where id=#{id}
+    </select>
+</mapper>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="queryRunner" class="org.apache.commons.dbutils.QueryRunner">
+        <constructor-arg name="ds" ref="dataSource"></constructor-arg>
+    </bean>
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="password" value="123456"></property>
+        <property name="user" value="root"></property>
+        <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+        <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/myaccount"></property>
+    </bean>
+
+
+    <bean id="accountService" class="service.impl.AccountServiceImpl">
+    <property name="accountDao" ref="accountDao"></property>
+     <property name="tx" ref="txManager"></property>
+
+    </bean>
+
+    <bean id="accountService1" class="service.impl.AccountServiceImpl1">
+        <property name="accountDao" ref="accountDao"></property>
+
+    </bean>
+
+
+
+    
+    <bean  id="txManager" class="untils.TXManager">
+        <property name="connectionUtil" ref="connectionUtil"></property>
+    </bean>
+    <bean id="connectionUtil" class="untils.ConnectionUtil">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <bean id="accountDao"  class="dao.impl.AccountDaoImpl">
+        <property name="queryRunner" ref="queryRunner"></property>
+        <property name="connectionUtil" ref="connectionUtil"></property>
+    </bean>
+
+    <bean id="accountServerProxy" class="service._proxy.AccountServerProxy">
+        <property name="accountService" ref="accountService1"></property>
+        <property name="txManager" ref="txManager"></property>
+    </bean>
+    <bean id="accountService2" class="service.AccountService"
+          factory-bean="accountServerProxy"
+          factory-method="getObject">
+
+    </bean>
+
+
+
+
+
+
+
+</beans>

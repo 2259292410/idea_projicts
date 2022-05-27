@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kuang.mapper.StudentMapper">
+    <select id="queryAll" resultType="com.kuang.pojo.Student">
+        select * from student
+    </select>
+
+    <select id="getStudents" resultMap="StudentTeacher">
+        select * from student
+    </select>
+    <resultMap id="StudentTeacher" type="com.kuang.pojo.Student">
+        <association property="teacher" column="tid" javaType="com.kuang.pojo.Teacher" select="getTeacher" />
+    </resultMap>
+    <select id="getTeacher" resultType="com.kuang.pojo.Teacher">
+        select  * from teacher where id =#{id}
+    </select>
+
+    <select id="getStudents2" resultMap="StudentTeacher2">
+        SELECT s.id sid,s.name sname,t.name tname
+        FROM student s,teacher t
+        WHERE s.tid=t.id
+    </select>
+
+    <resultMap id="StudentTeacher2" type="com.kuang.pojo.Student" autoMapping="true">
+        <id property="id" column="sid"/>
+        <result property="name" column="sname"/>
+        <association property="teacher" javaType="com.kuang.pojo.Teacher" autoMapping="true">
+            <result property="name" column="tname"/>
+        </association>
+    </resultMap>
+
+    <select id="getStudentById" resultMap="student">
+        select * from student where id=#{id}
+    </select>
+    <resultMap id="student" type="com.kuang.pojo.Student">
+        <association property="teacher" column="tid" javaType="com.kuang.pojo.Teacher" select="TeacherId"/>
+    </resultMap>
+    <select id="TeacherId" resultType="com.kuang.pojo.Teacher">
+        select * from teacher where id=#{id}
+    </select>
+
+</mapper>

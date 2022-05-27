@@ -1,0 +1,61 @@
+header {
+    border-bottom: 2px solid #c81523;
+}
+
+.search {
+    position: absolute;
+    left: 655px;
+    top: 36px;
+    width: 325px;
+    height: 29px;
+    border: 2px solid #b1191a;
+}
+
+.search input {
+    float: left;
+    width: 260px;
+    height: 25px;
+    padding-left: 10px;
+}
+.search button {
+    float: left;
+    width: 65px;
+    height: 30px;
+    background-color: #b1191a;
+    font-size: 16px;
+    color: #fff;
+}
+
+
+
+#main {
+    margin-top: 20px;
+    height: 440px;
+    width: 1200px;
+    border: 1px #b1191a solid;
+    overflow: auto;
+}
+
+
+#main table{
+    margin: auto;
+    margin-top: 20px;
+    border-collapse: collapse;
+    width: 1000px;
+}
+
+#main table td{
+    font-size: 18px;
+    width: 120px;
+    text-align:center;
+    border-bottom: 1px #e3e3e3 solid;
+    padding: 10px;
+}
+
+#main table td a{
+    color: blue;
+}
+#main table td a:hover{
+    color: #b1191a;
+}
+

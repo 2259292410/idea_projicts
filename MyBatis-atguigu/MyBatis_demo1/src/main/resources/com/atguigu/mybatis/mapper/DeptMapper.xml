@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.atguigu.mybatis.mapper.DeptMapper">
+
+    <!--    Dept getDeptById(@Param("did") Integer id);-->
+    <select id="getDeptById" resultType="dept">
+        select * from t_dept where d_id=#{did}
+    </select>
+
+    <!--    List<Emp> getDeptEmpByDid(@Param("did") Integer id);-->
+        <select id="getDeptEmpByDid" resultMap="deptEmpMap">
+    SELECT d.*,e.* FROM t_dept e LEFT JOIN t_emp d ON d.d_id=e.d_id
+    WHERE d.d_id=#{did}
+        </select>
+        <resultMap id="deptEmpMap" type="dept">
+            <id property="dId" column="d_id"/>
+            <result property="dName" column="d_name"/>
+            <collection property="emps" ofType="emp">
+                <id property="eId" column="e_id"/>
+                <result property="eName" column="e_name"/>
+                <result property="sex" column="sex"/>
+                <result property="age" column="age"/>
+            </collection>
+        </resultMap>
+
+<!--    Dept getDeptByStep(@Param("did") int did);-->
+    <select id="getDeptByStep" resultMap="deptEmpStep">
+        select * from t_dept where d_id=#{did}
+    </select>
+    <resultMap id="deptEmpStep" type="dept">
+        <id property="dId" column="d_id"/>
+        <result property="dName" column="d_name"/>
+        <collection property="emps" ofType="emp"
+                    select="com.atguigu.mybatis.mapper.EmpMapper.getEmpListByDid"
+                    column="did">
+            <id property="eId" column="e_id"/>
+            <result property="eName" column="e_name"/>
+            <result property="sex" column="sex"/>
+            <result property="age" column="age"/>
+        </collection>
+    </resultMap>
+</mapper>

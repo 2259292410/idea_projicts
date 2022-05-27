@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="studentService1"  class="service.impl.StudentServiceImpl">
+        <constructor-arg index="0" value="11"></constructor-arg>
+        <constructor-arg index="1" value="abc"></constructor-arg>
+    </bean>
+
+    <bean id="daoimpl" class="dao.impl.StudentDaoimpl"> </bean>
+    <bean id="studentService" class="service.impl.StudentServiceImpl">
+     <property name="studentDao" ref="daoimpl"></property>
+    </bean>
+
+
+    <bean id="queryRunner" class="org.apache.commons.dbutils.QueryRunner">
+        <constructor-arg name="ds" ref="dataSource"></constructor-arg>
+    </bean>
+
+    <bean id="accountDao" class="dao.impl.AccountDaoImpl">
+        <property name="queryRunner" ref="queryRunner"></property>
+    </bean>
+
+    <bean id="accountService" class="service.impl.AccountServiceImpl">
+        <property name="accountDao" ref="accountDao"></property>
+    </bean>
+
+
+    <bean id="beanModel" class="pojo.BeanModel">
+        <!-- property  给属性赋值
+        给基本的数据类型赋值
+        给bean 赋值
+              name：属性名称： value 值
+ref  表示给对象赋值 并去容器中查找对象
+               -->
+        <property name="studentService" ref="studentService" ></property>
+        <property name="a" value="11"></property>
+        <property name="s" value="比比东"></property>
+        <property name="map">
+            <map>
+                <entry key="sex" value="女"></entry>
+                <entry key="mp" value="武魂殿"></entry>
+            </map>
+        </property>
+        <property name="myProps">
+            <props>
+                <prop key="gji">100</prop>
+                <prop key="fuk">-10</prop>
+            </props>
+        </property>
+        <property name="list">
+            <list>
+                <value>list1</value>
+                <value>list2</value>
+            </list>
+        </property>
+        <property name="set">
+            <set>
+                <value>set1</value>
+                <value>set2</value>
+            </set>
+        </property>
+        <property name="strs">
+            <array>
+                <value>strs11</value>
+                <value>strs12</value>
+                <value>strs3</value>
+            </array>
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="password" value="123456"></property>
+        <property name="user" value="root"></property>
+        <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+        <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/myaccount"></property>
+    </bean>
+</beans>

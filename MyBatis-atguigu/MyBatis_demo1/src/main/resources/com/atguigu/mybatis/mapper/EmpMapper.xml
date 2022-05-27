@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.atguigu.mybatis.mapper.EmpMapper">
+
+    <sql id="empColumns">
+        e_id,e_name,sex,age,d_id
+    </sql>
+    
+    
+    <!--int deleteMoreByArray(int[] eids);-->
+    <delete id="deleteMoreByArray">
+        delete from t_emp where
+        <foreach collection="eids" item="eid" separator="or">
+            e_id=#{eid}
+        </foreach>
+    </delete>
+
+
+    <!--int insertMoreEmp(List<Emp> emps);-->
+    <insert id="insertMoreEmp">
+        insert into  t_emp values
+        <foreach collection="emps" item="emp" separator=",">
+            (null ,#{emp.eName},#{emp.sex},#{emp.age},null)
+        </foreach>
+    </insert>
+
+
+<!--    List<Emp> getEmpListByMoreTJ(Emp emp);-->
+    <select id="getEmpListByMoreTJ" resultType="emp">
+        select * from t_emp
+        <where>
+            <if test="eName!=null and eName!=''">
+                and e_name =#{eName}
+            </if>
+            <if test="sex!=null and sex!=''">
+                and sex =#{sex}
+            </if>
+            <if test="age!=null and age!=''">
+                and age =#{age}
+            </if>
+        </where>
+    </select>
+    
+    
+<!--List<Emp> getAllEmp();-->
+    <resultMap id="emp_clo" type="emp">
+        <id property="eId" column="e_id"/>
+        <result property="eName" column="e_name"/>
+        <result property="sex" column="sex"/>
+        <result property="age" column="age"/>
+    </resultMap>
+    <select id="getAllEmp" resultType="emp">
+        select * from t_emp
+    </select>
+
+<!--    List<Emp> getEmpListByDid(@Param("did") int did);-->
+    <select id="getEmpListByDid" resultType="emp">
+       select * from t_emp where d_id=#{did}
+    </select>
+
+
+<!--     Emp getEmpById(@Param("eid") Integer id);-->
+    <select id="getEmpById" resultMap="empDeptMap" >
+        select <include refid="empColumns"/> from t_emp where e_id=#{eid}
+    </select>
+    <resultMap id="empDeptMap" type="emp">
+        <id property="eId" column="e_id"/>
+        <result property="eName" column="e_name"/>
+        <result property="sex" column="sex"/>
+        <result property="age" column="age"/>
+        <association fetchType="lazy" property="dept" column="d_id" javaType="dept" select="com.atguigu.mybatis.mapper.DeptMapper.getDeptById" >
+            <id property="dId" column="d_id"/>
+            <result property="dName" column="d_name"/>
+        </association>
+    </resultMap>
+
+
+
+    <!--<select id="getEmpById" resultMap="empDeptMap">
+       SELECT emp.*,dept.* FROM t_emp emp LEFT JOIN t_dept dept ON emp.d_id=dept.d_id
+       WHERE emp.e_id=#{eid}
+    </select>
+    <resultMap id="empDeptMap" type="emp">
+        <id property="eId" column="e_id"/>
+        <result property="eName" column="e_name"/>
+        <result property="sex" column="sex"/>
+        <result property="age" column="age"/>
+        <association property="dept" javaType="dept" >
+            <id property="dId" column="d_id"/>
+            <result property="dName" column="d_name"/>
+        </association>
+    </resultMap>-->
+</mapper>

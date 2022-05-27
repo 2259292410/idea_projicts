@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="userService" class="com.tc51.service.UserServiceImpl"></bean>
+    <bean id="log" class="com.tc51.util.Log"></bean>
+
+    <aop:config>
+        <aop:pointcut id="p1" expression="execution( * *..*.find*(..))"/>
+
+        <aop:aspect id="a1" ref="log">
+<!--            <aop:before method="begin" pointcut-ref="p1"></aop:before>-->
+<!--            <aop:after method="after" pointcut-ref="p1"></aop:after>-->
+<!--            <aop:after-throwing method="error1" pointcut-ref="p1"></aop:after-throwing>-->
+<!--            <aop:after-returning method="over" pointcut-ref="p1"></aop:after-returning>-->
+<aop:around method="around" pointcut-ref="p1"></aop:around>
+        </aop:aspect>
+
+<!--  访问访问级别 返回值类型 包名.类名.方法名(参数列表)      -->
+
+    </aop:config>
+
+</beans>

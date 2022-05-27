@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--配置 User 对象创建-->
+    <bean id="user" class="User"></bean>
+    <bean id="animal" class="Animal">
+        <property name="arr">
+            <array>
+                <value>java</value>
+                <value>php</value>
+                <value>c#</value>
+            </array>
+        </property>
+        <property name="list">
+            <bean id="dog" class="Dog">
+                <property name="name" value="小黄"></property>
+            </bean>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="key1" value-ref="dog2"></entry>
+            </map>
+        </property>
+        <property name="set">
+            <set>
+                <value>set1</value>
+                <value>set2</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="dog2" class="Dog">
+        <property name="name" value="小黑"></property>
+    </bean>
+</beans>

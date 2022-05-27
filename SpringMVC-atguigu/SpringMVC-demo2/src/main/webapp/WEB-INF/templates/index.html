@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>首页</h1>
+<a th:href="@{/test}">测试1</a><br>
+<form th:action="@{/test}" method="post">
+    <input type="submit">
+</form>
+<br>
+<a th:href="@{/test2}">测试2</a><br>
+<a th:href="@{/test3(username='admin')}">测试3</a><br>
+<form th:action="@{/test4}" method="post">
+    <input type="text" name="username" ><br>
+    <input type="password" name="password" ><br>
+    <input type="radio" name="sex" value="女">女
+    <input type="radio" name="sex" value="男">男<br>
+    <input type="checkbox" name="hobby" value="a">a
+    <input type="checkbox" name="hobby" value="b">b
+    <input type="checkbox" name="hobby" value="c">c<br>
+    <input type="submit" value="提交">
+</form>
+<a th:href="@{/testModelAndView}">测试ModelAndView</a><br>
+<a th:href="@{/testModel}">测试Model</a><br>
+<a th:href="@{/testSession}">测试session</a><br>
+<a th:href="@{/testApplication}">测试application</a><br>
+</body>
+</html>

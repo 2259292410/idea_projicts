@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="hello" class="com.kuang.pojo.Hello">
+        <property name="name"  value="张三"/>
+    </bean>
+
+    <bean id="user" class="com.kuang.pojo.User" scope="singleton">
+        <constructor-arg index="0" value="admin"/>
+        <constructor-arg index="1" value="admin"/>
+    </bean>
+
+     <bean id="address" class="com.kuang.pojo.Address">
+        <property name="address" value="中国"/>
+    </bean>
+
+    <bean id="student" class="com.kuang.pojo.Student">
+        <property name="name" value="小明"/>
+        <property name="address" ref="address"/>
+        <property name="books" >
+            <array>
+                <value>Java</value>
+                <value>.NET</value>
+            </array>
+        </property>
+        <property name="hobbys">
+            <list>
+                <value>足球</value>
+                <value>篮球</value>
+            </list>
+        </property>
+        <property name="card">
+            <map>
+                <entry key="身份证" value="3333333333"/>
+            </map>
+        </property>
+        <property name="games">
+            <set>
+                <value>CF</value>
+                <value>QQ</value>
+                <value>LOL</value>
+            </set>
+        </property>
+        <property name="wife">
+            <null/>
+        </property>
+        <property name="info">
+            <props>
+                <prop key="dd">123123</prop>
+            </props>
+        </property>
+    </bean>
+
+
+</beans>

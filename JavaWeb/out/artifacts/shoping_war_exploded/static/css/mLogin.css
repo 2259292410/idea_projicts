@@ -1,0 +1,26 @@
+
+
+.bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: url(http://localhost:8080/shoping/static/img/bg.jpg) center bottom;
+    display: flex;/*重要*/ /*横向排列*/
+    align-items: center; /*重要*/ /*子类居中*/
+}
+.login_from{
+    width: 400px;
+    /* height: 200px; */
+    background: #fff;
+    border: solid 1px #ddd;
+    border-radius: 20px;
+    margin: 0 auto; /*重要*/ /*子类居中*/
+    font-size: 14px;
+    font: inherit;
+    vertical-align: baseline;
+    margin-top: 10px;
+}
+.login_from h1{
+    text-align: center;
+    margin: 10px;
+}
