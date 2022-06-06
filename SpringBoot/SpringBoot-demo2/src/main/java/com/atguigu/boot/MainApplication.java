@@ -1,7 +1,7 @@
 package com.atguigu.boot;
 
-import com.atguigu.boot.bean.Pet;
-import com.atguigu.boot.bean.User;
+import com.atguigu.boot.pojo.Pet;
+import com.atguigu.boot.pojo.User;
 import com.atguigu.boot.config.MyConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
