@@ -26,6 +26,8 @@
     </properties>
 
     <!--配置dependencyManagement锁定依赖的版本-->
+<dependencyManagement>
+
 
         <dependencies>
             <dependency>
@@ -113,7 +115,7 @@
                 <version>${jodatime.version}</version>
             </dependency>
         </dependencies>
-
+</dependencyManagement>
 
 
 
