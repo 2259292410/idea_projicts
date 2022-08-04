@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.admin.mapper.DomMapper">
+    <insert id="addDom" parameterType="com.atguigu.admin.bean.Dom">
+        INSERT INTO `print_template_details2`
+	(
+	`type`,
+	`domlist`,
+	`del_flag`
+	)
+	VALUES
+	(
+	#{type},
+	 #{domList},
+	'0'
+	)
+    </insert>
+	<update id="updateDomById">
+		update `print_template_details2` SET type =#{type},domlist=#{domList} where id=#{id}
+	</update>
+	<delete id="deleteDomByType">
+		update `print_template_details2` SET del_flag=2 WHERE type=#{type}
+	</delete>
+
+	<select id="getDomListByType" resultType="com.atguigu.admin.bean.Dom">
+        select t.id,t.type,t.domlist from print_template_details2 t WHERE type =#{type} and del_flag='0'
+    </select>
+
+	<select id="getAllDom" resultType="com.atguigu.admin.bean.Dom">
+		select t.id,t.type,t.domlist from print_template_details2 t WHERE del_flag='0'
+	</select>
+
+</mapper>
